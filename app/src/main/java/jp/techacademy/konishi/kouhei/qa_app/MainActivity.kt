@@ -20,10 +20,12 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import android.util.Base64  //追加する
+import android.view.View
 import android.widget.ListView
+import kotlinx.android.synthetic.main.activity_question_detail.*
 
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, View.OnClickListener  {
 
     private lateinit var mToolbar: Toolbar
     private var mGenre = 0
@@ -162,9 +164,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             intent.putExtra("question", mQuestionArrayList[position])
             startActivity(intent)
         }
+        button1.setOnClickListener(this)
     }
 
-
+    override fun onClick(v: View) {
+        if (button1.text == "お気に入り登録"){
+            button1.text = "登録済み"
+        }else {
+            button1.text = "お気に入り登録"
+        }
+    }
     override fun onResume() {
         super.onResume()
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
